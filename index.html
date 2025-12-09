@@ -172,6 +172,8 @@
         .broken-heart.healed {
             animation: healPulse 1.5s ease-in-out infinite;
             filter: drop-shadow(0 0 50px rgba(255, 100, 180, 0.8)) drop-shadow(0 0 80px rgba(255, 50, 150, 0.5));
+            color: #ff3366;
+            /* Ensure it looks like a red heart */
         }
 
         @keyframes healPulse {
@@ -254,12 +256,47 @@
             }
         }
 
+        /* Waiting Message Style */
+        .waiting-message {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #ff4081;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+
+        .waiting-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
         .buttons-container {
             display: flex;
             gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .buttons-container.disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         .btn {
@@ -342,6 +379,76 @@
                 opacity: 0;
                 transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0.3);
             }
+        }
+
+        /* ============ MODAL STYLES ============ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 90%;
+            width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            color: #5a3a4a;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #ff8fab 0%, #ff5c8d 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: inherit;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.05);
         }
 
         /* ============ PAGE 2 STYLES ============ */
@@ -518,7 +625,8 @@
 
 <body>
     <!-- Background Music -->
-    <audio id="bg1" src="song1.mp3" loop preload="auto" autoplay></audio>
+    <!-- Removed 'loop' from bg1 so we can detect when it ends -->
+    <audio id="bg1" src="song1.mp3" preload="auto" autoplay></audio>
     <audio id="bg2" src="song2.mp3" loop preload="auto"></audio>
     <iframe src="song1.mp3" allow="autoplay" id="audioIframe" style="display:none"></iframe>
 
@@ -540,10 +648,14 @@
             Let me fix it..
         </p>
 
-        <div class="buttons-container">
+        <div class="buttons-container" id="buttonsContainer">
             <button class="btn btn-no" id="btnNo">Let it stay broken 💔</button>
-            <button class="btn btn-yes" id="btnYes">Let's fix it💖</button>
+            <button class="btn btn-yes" id="btnYes">Let's fix it together 💖</button>
         </div>
+
+        <p class="waiting-message" id="waitingMessage">
+            Let the song finish… then my heart will speak.
+        </p>
     </section>
 
     <!-- PAGE 2: Apology Letter -->
@@ -556,6 +668,21 @@
             <div class="letter-content" id="letterContent"></div>
         </div>
     </section>
+
+    <!-- MODAL POPUP -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <p class="modal-text">
+                Wait, Begum… this song isn’t just a song.<br>
+                It’s everything I couldn’t say properly in words.<br>
+                Please listen to it till the end — it’s my feelings for you.
+            </p>
+            <p class="modal-subtitle">
+                When it finishes, my heart will speak to you in the letter.
+            </p>
+            <button class="modal-btn" id="modalBtn">Okay… I’ll listen 💗</button>
+        </div>
+    </div>
 
     <script>
         // ============ LETTER CONTENT ============
@@ -590,6 +717,8 @@
         const heartCrack = document.getElementById('heartCrack');
         const btnNo = document.getElementById('btnNo');
         const btnYes = document.getElementById('btnYes');
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        const waitingMessage = document.getElementById('waitingMessage');
         const petalsContainer = document.getElementById('petalsContainer');
         const swirlContainer = document.getElementById('swirlContainer');
         const letterContent = document.getElementById('letterContent');
@@ -597,12 +726,18 @@
         const bg1 = document.getElementById('bg1');
         const bg2 = document.getElementById('bg2');
 
+        // Modal Elements
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalBtn = document.getElementById('modalBtn');
+
         // ============ STATE VARIABLES ============
         let yesButtonScale = 1;
         let noClickCount = 0;
         let isTransitioning = false;
 
         // ============ FORCE AUTOPLAY STRATEGY ============
+        let checkPlayInterval; // Global variable to control the retry loop
+
         function startSong1() {
             bg1.volume = 0.6;
             bg2.volume = 0.6;
@@ -620,10 +755,10 @@
             }
 
             // 3. Fallback: Check constantly if we can play
-            const checkPlay = setInterval(() => {
+            checkPlayInterval = setInterval(() => {
                 if (bg1.paused) {
                     bg1.play().then(() => {
-                        clearInterval(checkPlay);
+                        clearInterval(checkPlayInterval);
                         // Remove fallback iframe if it exists
                         const iframe = document.getElementById('audioIframe');
                         if (iframe) iframe.remove();
@@ -631,16 +766,15 @@
                         // Keep trying
                     });
                 } else {
-                    clearInterval(checkPlay);
+                    clearInterval(checkPlayInterval);
                 }
             }, 2000);
 
             // 4. Interaction backup (just in case browser is ultra strict)
-            // Use capture phase to catch event BEFORE anything else processing it
             const forcePlay = () => {
                 bg1.play().catch(() => { });
                 // Once touched, we can stop the forceful checking
-                clearInterval(checkPlay);
+                if (checkPlayInterval) clearInterval(checkPlayInterval);
                 removeListeners();
             };
 
@@ -659,9 +793,19 @@
             document.body.addEventListener('scroll', forcePlay, { capture: true, once: true });
         }
 
+        // Triggered automatically when Song 1 finishes
+        bg1.addEventListener('ended', () => {
+            console.log("Song 1 ended... transition to Page 2");
+            finishTransition();
+        });
+
         function switchToSong2() {
+            // STOP song1 aggressive retry loop
+            if (checkPlayInterval) clearInterval(checkPlayInterval);
+
+            // We don't need to pause bg1 here because it just ended
+            // But we can ensure it's not playing just in case
             bg1.pause();
-            bg1.currentTime = 0;
 
             // Remove fallback iframe if it still exists
             const iframe = document.getElementById('audioIframe');
@@ -706,7 +850,7 @@
 
         // ============ NO BUTTON BEHAVIOR ============
         btnNo.addEventListener('click', () => {
-            // Try to play song1 if not playing (in case autoplay was blocked)
+            // Try to play song1 if not playing
             if (bg1.paused) {
                 bg1.play().catch(() => { });
             }
@@ -742,20 +886,51 @@
             }
         });
 
-        // ============ YES BUTTON BEHAVIOR ============
+        // ============ YES BUTTON (Modal) BEHAVIOR ============
         btnYes.addEventListener('click', () => {
             if (isTransitioning) return;
-            isTransitioning = true;
+            isTransitioning = true; // Mark as transitioning so we don't double click
 
-            // Try to play song1 if not playing (in case autoplay was blocked)
+            // Ensure song1 is playing
             if (bg1.paused) {
                 bg1.play().catch(() => { });
             }
 
-            // Heal the heart
+            // Show the modal
+            modalOverlay.classList.add('active');
+        });
+
+        // ============ MODAL 'OK' BEHAVIOR ============
+        modalBtn.addEventListener('click', () => {
+            // Close modal
+            modalOverlay.classList.remove('active');
+
+            // Disable buttons and show waiting message
+            buttonsContainer.classList.add('disabled');
+            waitingMessage.classList.add('visible');
+
+            // Heart can pulse a bit while waiting
+            brokenHeart.classList.remove('dimmed');
+            brokenHeart.classList.add('healed'); // Just to start the warm pulse, text stays same for now
+            brokenHeart.textContent = '💔'; // Keep it broken for now, until song ends
+            // Override the healed animation to just be a soft pulse if needed, 
+            // but the existing 'healed' class has a nice pulse. 
+            // We want it to "pulse warmly". The current 'healed' animation is 'healPulse'.
+            // That works.
+        });
+
+        // ============ FINISH TRANSITION (Call when song ends) ============
+        function finishTransition() {
+            // STOP song1 aggressive retry loop IMMEDIATELY
+            if (checkPlayInterval) clearInterval(checkPlayInterval);
+
+            // Heal the heart fully
             brokenHeart.textContent = '❤️';
             brokenHeart.classList.add('healed');
             heartCrack.classList.add('healed');
+
+            // Hide waiting message
+            waitingMessage.classList.remove('visible');
 
             // Create swirl effect
             createSwirlEffect();
@@ -783,7 +958,7 @@
                     }, 100);
                 }, 800);
             }, 1200);
-        });
+        }
 
         // ============ SWIRL EFFECT ============
         function createSwirlEffect() {
