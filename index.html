@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Pragati 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 25%, #ffd6e7 50%, #ffcce0 75%, #ffc0d8 100%);
+            background-attachment: fixed;
+        }
+
+        /* Cherry Blossom Petals Container */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            top: -60px;
+            opacity: 0;
+            will-change: transform;
+            animation: petalFall linear infinite;
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 0;
+                transform: translateY(-60px) rotate(0deg) translateX(0);
+            }
+
+            10% {
+                opacity: 0.9;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) translateX(80px);
+            }
+        }
+
+        /* Page Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .page-hidden {
+            display: none !important;
+        }
+
+        .page-fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* ============ PAGE 1 STYLES ============ */
+        #page1 {
+            text-align: center;
+        }
+
+        .heart-wrapper {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .broken-heart {
+            font-size: 130px;
+            display: inline-block;
+            position: relative;
+            animation: weakHeartbeat 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 8px 30px rgba(255, 100, 150, 0.5));
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes weakHeartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.04);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.02);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        .broken-heart.dimmed {
+            opacity: 0.4;
+            filter: drop-shadow(0 5px 15px rgba(150, 100, 120, 0.3)) grayscale(40%);
+        }
+
+        .broken-heart.shake {
+            animation: heartShake 0.6s ease-in-out;
+        }
+
+        @keyframes heartShake {
+
+            0%,
+            100% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            15% {
+                transform: translateX(-8px) rotate(-3deg);
+            }
+
+            30% {
+                transform: translateX(8px) rotate(3deg);
+            }
+
+            45% {
+                transform: translateX(-6px) rotate(-2deg);
+            }
+
+            60% {
+                transform: translateX(6px) rotate(2deg);
+            }
+
+            75% {
+                transform: translateX(-3px) rotate(-1deg);
+            }
+        }
+
+        .broken-heart.healed {
+            animation: healPulse 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 50px rgba(255, 100, 180, 0.8)) drop-shadow(0 0 80px rgba(255, 50, 150, 0.5));
+        }
+
+        @keyframes healPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .heart-crack {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 5px;
+            height: 70px;
+            background: linear-gradient(180deg, transparent 0%, #2a1a1a 20%, #3d2525 50%, #2a1a1a 80%, transparent 100%);
+            opacity: 0.75;
+            z-index: 10;
+            transition: all 1s ease;
+            border-radius: 2px;
+        }
+
+        .heart-crack::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: -10px;
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, transparent, #2a1a1a, transparent);
+            transform: rotate(-35deg);
+            border-radius: 2px;
+        }
+
+        .heart-crack::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            right: -10px;
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, transparent, #2a1a1a, transparent);
+            transform: rotate(35deg);
+            border-radius: 2px;
+        }
+
+        .heart-crack.healed {
+            opacity: 0;
+            height: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .message-text {
+            max-width: 520px;
+            margin: 0 auto 45px;
+            font-size: 1.25rem;
+            line-height: 2;
+            color: #7d3c5a;
+            font-weight: 400;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+            animation: textFadeIn 1.5s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes textFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
+            color: #666;
+        }
+
+        .btn-no:hover {
+            background: linear-gradient(135deg, #ddd 0%, #c5c5c5 100%);
+            transform: translateY(-2px);
+        }
+
+        .btn-no.slide-out {
+            animation: slideOutLeft 0.8s cubic-bezier(0.4, 0, 1, 1) forwards;
+        }
+
+        @keyframes slideOutLeft {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(-200px);
+            }
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff8fab 0%, #ff5c8d 50%, #ff4081 100%);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-yes:hover {
+            background: linear-gradient(135deg, #ff7a9e 0%, #ff4a7d 50%, #ff2070 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 92, 141, 0.4);
+        }
+
+        /* Swirl effect container */
+        .swirl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .swirl-petal {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            animation: swirlAround 2s ease-out forwards;
+        }
+
+        @keyframes swirlAround {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0.3);
+            }
+        }
+
+        /* ============ PAGE 2 STYLES ============ */
+        #page2 {
+            padding: 50px 20px 80px;
+            min-height: 100vh;
+            justify-content: flex-start;
+            opacity: 0;
+        }
+
+        #page2.page-visible {
+            opacity: 1;
+        }
+
+        .thank-you-header {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #c94c7c;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 1s ease;
+        }
+
+        .thank-you-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-container {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 250, 252, 0.88) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 50px 45px;
+            box-shadow:
+                0 25px 80px rgba(255, 150, 180, 0.2),
+                0 10px 30px rgba(255, 100, 150, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 200, 220, 0.5);
+        }
+
+        .letter-content {
+            color: #5a3a4a;
+            line-height: 2;
+            font-size: 1.08rem;
+            font-weight: 400;
+        }
+
+        .letter-paragraph {
+            margin-bottom: 24px;
+            min-height: 1.5em;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .letter-paragraph.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-paragraph.typing {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: #c94c7c;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: cursorBlink 0.6s step-end infinite;
+        }
+
+        @keyframes cursorBlink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .broken-heart {
+                font-size: 100px;
+            }
+
+            .heart-crack {
+                height: 55px;
+            }
+
+            .heart-crack::before,
+            .heart-crack::after {
+                height: 22px;
+            }
+
+            .message-text {
+                font-size: 1.1rem;
+                padding: 0 15px;
+                line-height: 1.9;
+            }
+
+            .btn {
+                padding: 14px 26px;
+                font-size: 1rem;
+            }
+
+            .buttons-container {
+                gap: 18px;
+            }
+
+            .letter-container {
+                padding: 35px 28px;
+                margin: 0 15px;
+                border-radius: 24px;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+                line-height: 1.9;
+            }
+
+            .thank-you-header {
+                font-size: 1.25rem;
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .broken-heart {
+                font-size: 80px;
+            }
+
+            .heart-crack {
+                height: 45px;
+            }
+
+            .message-text {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 22px;
+                font-size: 0.95rem;
+            }
+
+            .letter-container {
+                padding: 28px 22px;
+            }
+
+            .letter-content {
+                font-size: 0.95rem;
+            }
+
+            .thank-you-header {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Music -->
+    <audio id="bg1" src="song1.mp3" loop preload="auto" autoplay></audio>
+    <audio id="bg2" src="song2.mp3" loop preload="auto"></audio>
+    <iframe src="song1.mp3" allow="autoplay" id="audioIframe" style="display:none"></iframe>
+
+    <!-- Cherry Blossom Petals -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- Swirl Effect Container -->
+    <div class="swirl-container" id="swirlContainer"></div>
+
+    <!-- PAGE 1: Broken Heart -->
+    <section id="page1">
+        <div class="heart-wrapper">
+            <div class="broken-heart" id="brokenHeart">💔</div>
+            <div class="heart-crack" id="heartCrack"></div>
+        </div>
+
+        <p class="message-text">
+            Pragati… I know I hurt you.<br>
+            Let me fix it..
+        </p>
+
+        <div class="buttons-container">
+            <button class="btn btn-no" id="btnNo">Let it stay broken 💔</button>
+            <button class="btn btn-yes" id="btnYes">Let's fix it💖</button>
+        </div>
+    </section>
+
+    <!-- PAGE 2: Apology Letter -->
+    <section id="page2" class="page-hidden">
+        <h2 class="thank-you-header" id="thankYouHeader">
+            Please... just hear what my heart is trying to say...
+        </h2>
+
+        <div class="letter-container">
+            <div class="letter-content" id="letterContent"></div>
+        </div>
+    </section>
+
+    <script>
+        // ============ LETTER CONTENT ============
+        const letterParagraphs = [
+            `Pragati…<br>I don't even know how to start this properly, so I'm writing it because I didn't have the courage to say all of this on a call.`,
+            `These last two weeks have been really heavy for me.<br>And none of this was because of you…<br>It was because of everything happening around me,<br>and everything going on inside me.<br>I was frustrated, anxious, stressed,<br>and honestly not in the right state of mind.`,
+            `And instead of handling it the right way,<br>I did the one thing I never wanted to do…`,
+            `I distanced myself from you.`,
+            `That day, on the call, when you had to leave because your friend called—<br>something inside me just… hurt..<br>Not anger… not ego…<br>but that feeling you get when life is already hurting you,<br>and the smallest thing pushes you over the edge.`,
+            `After that, everything I was dealing with — the frustration, the anxiety, the loneliness —<br>it all mixed together, and I wrongly attached those feelings to you.`,
+            `You didn't deserve that.<br>Not even for a second.`,
+            `You came every day trying to talk to me,<br>trying to calm me,<br>trying to be there for me…`,
+            `And I kept ignoring you.<br>Not because I didn't care,<br>not because I was angry,<br>but because I was broken inside<br>and I didn't know how to explain it to you.`,
+            `I missed you every day.<br>Every night felt heavier because I wanted to talk to you,<br>but I didn't have the courage<br>to show you how messed up I felt inside.`,
+            `And then… when you said you needed space,<br>when you took back the rights I used to have,<br>and especially when you said I can't call you Begum anymore…<br>that hit me harder than anything else.`,
+            `Pragati… Begummm… Billi ji…<br>I'm so, so sorry.`,
+            `I never wanted to make you feel unimportant.<br>I never wanted to make you feel like I don't value you.<br>I never took you for granted.`,
+            `The truth is the opposite:<br>I distanced myself because I was breaking inside —<br>not because of anything you did.`,
+            `You were always the one trying.<br>Always the one reaching out.<br>Always the one understanding.<br>And I didn't give you the same when you needed it.`,
+            `I regret that.<br>I regret all of it.`,
+            `This letter… this whole thing…<br>is me finally saying what I should've told you from the start.`,
+            `Pragati, I'm truly sorry.<br>For the silence.<br>For the distance.<br>For the hurt.<br>For everything.`,
+            `And if you allow me…`,
+            `I wish I could call you Begummm again… the way I used to.<br>Not through words… but by showing you how much you truly mean to me.`,
+            `Thank you for staying with me.<br>Your idiot, who is trying to do better.`
+        ];
+
+        // ============ DOM ELEMENTS ============
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const brokenHeart = document.getElementById('brokenHeart');
+        const heartCrack = document.getElementById('heartCrack');
+        const btnNo = document.getElementById('btnNo');
+        const btnYes = document.getElementById('btnYes');
+        const petalsContainer = document.getElementById('petalsContainer');
+        const swirlContainer = document.getElementById('swirlContainer');
+        const letterContent = document.getElementById('letterContent');
+        const thankYouHeader = document.getElementById('thankYouHeader');
+        const bg1 = document.getElementById('bg1');
+        const bg2 = document.getElementById('bg2');
+
+        // ============ STATE VARIABLES ============
+        let yesButtonScale = 1;
+        let noClickCount = 0;
+        let isTransitioning = false;
+
+        // ============ FORCE AUTOPLAY STRATEGY ============
+        function startSong1() {
+            bg1.volume = 0.6;
+            bg2.volume = 0.6;
+
+            // 1. Try standard play immediately
+            const playPromise = bg1.play();
+            if (playPromise) {
+                playPromise.catch(e => {
+                    console.log("Standard autoplay failed, trying other methods...");
+                    // 2. Try again after a short delay (sometimes works on fast loads)
+                    setTimeout(() => {
+                        bg1.play().catch(() => { });
+                    }, 1000);
+                });
+            }
+
+            // 3. Fallback: Check constantly if we can play
+            const checkPlay = setInterval(() => {
+                if (bg1.paused) {
+                    bg1.play().then(() => {
+                        clearInterval(checkPlay);
+                        // Remove fallback iframe if it exists
+                        const iframe = document.getElementById('audioIframe');
+                        if (iframe) iframe.remove();
+                    }).catch(() => {
+                        // Keep trying
+                    });
+                } else {
+                    clearInterval(checkPlay);
+                }
+            }, 2000);
+
+            // 4. Interaction backup (just in case browser is ultra strict)
+            // Use capture phase to catch event BEFORE anything else processing it
+            const forcePlay = () => {
+                bg1.play().catch(() => { });
+                // Once touched, we can stop the forceful checking
+                clearInterval(checkPlay);
+                removeListeners();
+            };
+
+            const removeListeners = () => {
+                document.body.removeEventListener('click', forcePlay);
+                document.body.removeEventListener('touchstart', forcePlay);
+                document.body.removeEventListener('keydown', forcePlay);
+                document.body.removeEventListener('mousemove', forcePlay);
+                document.body.removeEventListener('scroll', forcePlay);
+            };
+
+            document.body.addEventListener('click', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('touchstart', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('keydown', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('mousemove', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('scroll', forcePlay, { capture: true, once: true });
+        }
+
+        function switchToSong2() {
+            bg1.pause();
+            bg1.currentTime = 0;
+
+            // Remove fallback iframe if it still exists
+            const iframe = document.getElementById('audioIframe');
+            if (iframe) iframe.remove();
+
+            bg2.play().catch(() => { });
+        }
+
+        // Start song1 immediately when page loads
+        window.addEventListener('load', startSong1);
+        document.addEventListener('DOMContentLoaded', startSong1);
+
+        // ============ CHERRY BLOSSOM PETALS ============
+        const petalTypes = ['🌸', '🌺', '💮', '✿', '❀'];
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = petalTypes[Math.floor(Math.random() * petalTypes.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = (Math.random() * 18 + 14) + 'px';
+            petal.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            petal.style.animationDelay = (Math.random() * 2) + 's';
+            petalsContainer.appendChild(petal);
+
+            const duration = parseFloat(petal.style.animationDuration) * 1000;
+            setTimeout(() => {
+                if (petal.parentNode) {
+                    petal.remove();
+                }
+            }, duration + 3000);
+        }
+
+        function initPetals() {
+            // Create initial batch
+            for (let i = 0; i < 12; i++) {
+                setTimeout(createPetal, i * 200);
+            }
+            // Continuous creation
+            setInterval(createPetal, 700);
+        }
+
+        // ============ NO BUTTON BEHAVIOR ============
+        btnNo.addEventListener('click', () => {
+            // Try to play song1 if not playing (in case autoplay was blocked)
+            if (bg1.paused) {
+                bg1.play().catch(() => { });
+            }
+
+            if (noClickCount >= 5) return;
+
+            noClickCount++;
+
+            // Shake and dim heart
+            brokenHeart.classList.add('shake', 'dimmed');
+
+            setTimeout(() => {
+                brokenHeart.classList.remove('shake');
+            }, 600);
+
+            setTimeout(() => {
+                brokenHeart.classList.remove('dimmed');
+            }, 700);
+
+            // Grow YES button
+            if (yesButtonScale < 1.7) {
+                yesButtonScale += 0.12;
+                btnYes.style.transform = `scale(${yesButtonScale})`;
+            }
+
+            // After 5 clicks, slide out NO button
+            if (noClickCount >= 5) {
+                btnNo.classList.add('slide-out');
+                setTimeout(() => {
+                    btnNo.style.visibility = 'hidden';
+                    btnNo.style.display = 'none';
+                }, 800);
+            }
+        });
+
+        // ============ YES BUTTON BEHAVIOR ============
+        btnYes.addEventListener('click', () => {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            // Try to play song1 if not playing (in case autoplay was blocked)
+            if (bg1.paused) {
+                bg1.play().catch(() => { });
+            }
+
+            // Heal the heart
+            brokenHeart.textContent = '❤️';
+            brokenHeart.classList.add('healed');
+            heartCrack.classList.add('healed');
+
+            // Create swirl effect
+            createSwirlEffect();
+
+            // Transition to Page 2
+            setTimeout(() => {
+                page1.classList.add('page-fade-out');
+
+                setTimeout(() => {
+                    page1.classList.add('page-hidden');
+                    page2.classList.remove('page-hidden');
+
+                    // Switch from song1 to song2
+                    switchToSong2();
+
+                    // Fade in page 2
+                    setTimeout(() => {
+                        page2.classList.add('page-visible');
+                        thankYouHeader.classList.add('visible');
+
+                        // Start letter animation
+                        setTimeout(() => {
+                            initializeLetterAnimation();
+                        }, 800);
+                    }, 100);
+                }, 800);
+            }, 1200);
+        });
+
+        // ============ SWIRL EFFECT ============
+        function createSwirlEffect() {
+            const heartRect = brokenHeart.getBoundingClientRect();
+            const centerX = heartRect.left + heartRect.width / 2;
+            const centerY = heartRect.top + heartRect.height / 2;
+
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'swirl-petal';
+                    petal.textContent = petalTypes[Math.floor(Math.random() * petalTypes.length)];
+
+                    const angle = (i / 20) * Math.PI * 2;
+                    const distance = 150 + Math.random() * 100;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance - 50;
+
+                    petal.style.left = centerX + 'px';
+                    petal.style.top = centerY + 'px';
+                    petal.style.setProperty('--tx', tx + 'px');
+                    petal.style.setProperty('--ty', ty + 'px');
+
+                    swirlContainer.appendChild(petal);
+
+                    setTimeout(() => {
+                        petal.remove();
+                    }, 2000);
+                }, i * 50);
+            }
+        }
+
+        // ============ LETTER TYPING ANIMATION ============
+        let currentParagraphIndex = 0;
+        let isTyping = false;
+
+        function initializeLetterAnimation() {
+            letterContent.innerHTML = '';
+
+            // Create all paragraph elements
+            letterParagraphs.forEach((text, index) => {
+                const p = document.createElement('p');
+                p.className = 'letter-paragraph';
+                p.setAttribute('data-index', index);
+                p.setAttribute('data-text', text);
+                letterContent.appendChild(p);
+            });
+
+            // Start typing first paragraph
+            currentParagraphIndex = 0;
+            typeNextParagraph();
+        }
+
+        function typeNextParagraph() {
+            if (currentParagraphIndex >= letterParagraphs.length) {
+                return;
+            }
+
+            const paragraphs = document.querySelectorAll('.letter-paragraph');
+            const currentP = paragraphs[currentParagraphIndex];
+            const fullText = currentP.getAttribute('data-text');
+
+            currentP.classList.add('typing');
+            typeParagraph(currentP, fullText, () => {
+                currentP.classList.remove('typing');
+                currentP.classList.add('revealed');
+
+                currentParagraphIndex++;
+
+                // Random delay between paragraphs (400-700ms)
+                const delay = 400 + Math.random() * 300;
+                setTimeout(typeNextParagraph, delay);
+            });
+        }
+
+        function typeParagraph(element, html, callback) {
+            let displayText = '';
+            let i = 0;
+
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+
+            element.innerHTML = '';
+            element.appendChild(cursor);
+
+            function typeChar() {
+                if (i >= html.length) {
+                    // Remove cursor when done
+                    if (cursor.parentNode) {
+                        cursor.remove();
+                    }
+                    element.innerHTML = displayText;
+                    if (callback) callback();
+                    return;
+                }
+
+                // Handle HTML tags like <br>
+                if (html.substring(i, i + 4) === '<br>') {
+                    displayText += '<br>';
+                    i += 4;
+                } else {
+                    displayText += html[i];
+                    i++;
+                }
+
+                // Update display
+                element.innerHTML = displayText;
+                element.appendChild(cursor);
+
+                // Random delay for natural feel (25-55ms)
+                const delay = 25 + Math.random() * 30;
+                setTimeout(typeChar, delay);
+            }
+
+            typeChar();
+        }
+
+        // ============ INITIALIZE ============
+        document.addEventListener('DOMContentLoaded', () => {
+            initPetals();
+        });
+    </script>
+</body>
+
+</html>
