@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Pragati 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -173,7 +174,6 @@
             animation: healPulse 1.5s ease-in-out infinite;
             filter: drop-shadow(0 0 50px rgba(255, 100, 180, 0.8)) drop-shadow(0 0 80px rgba(255, 50, 150, 0.5));
             color: #ff3366;
-            /* Ensure it looks like a red heart */
         }
 
         @keyframes healPulse {
@@ -421,14 +421,14 @@
         }
 
         .modal-text {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             color: #5a3a4a;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
         .modal-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #888;
             margin-bottom: 30px;
             font-style: italic;
@@ -543,7 +543,408 @@
             }
         }
 
-        /* Responsive Design */
+        /* ============ SURPRISE ENVELOPE BUTTON ============ */
+        .surprise-btn-container {
+            margin-top: 50px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .surprise-btn-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .surprise-btn {
+            background: linear-gradient(135deg, #ff9eb5 0%, #ff7aa0 50%, #ff6090 100%);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 40px rgba(255, 122, 160, 0.4),
+                0 0 0 0 rgba(255, 150, 180, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: gentlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                box-shadow: 
+                    0 10px 40px rgba(255, 122, 160, 0.4),
+                    0 0 0 0 rgba(255, 150, 180, 0.4);
+            }
+            50% {
+                box-shadow: 
+                    0 15px 50px rgba(255, 122, 160, 0.5),
+                    0 0 0 10px rgba(255, 150, 180, 0);
+            }
+        }
+
+        .surprise-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .surprise-btn:hover::before {
+            left: 100%;
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(255, 122, 160, 0.5);
+            background: linear-gradient(135deg, #ff8fae 0%, #ff6b95 50%, #ff5085 100%);
+        }
+
+        .surprise-btn:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        /* ============ ENVELOPE OVERLAY ============ */
+        .envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(60, 20, 40, 0.7) 0%, rgba(30, 10, 20, 0.85) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .envelope-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Envelope Petals Burst */
+        .envelope-petals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .burst-petal {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0;
+            animation: burstFall 4s ease-out forwards;
+        }
+
+        @keyframes burstFall {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(45deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(0.3);
+            }
+        }
+
+        /* Envelope Wrapper */
+        .envelope-wrapper {
+            position: relative;
+            transform: scale(0.7) translateY(50px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .envelope-overlay.active .envelope-wrapper {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        /* The Envelope */
+        .envelope {
+            width: 320px;
+            height: 220px;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        /* Envelope Body */
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #ffe8f0 0%, #ffd4e3 100%);
+            border-radius: 8px;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.3),
+                inset 0 -5px 15px rgba(255, 180, 200, 0.3);
+            overflow: hidden;
+        }
+
+        /* Envelope Inner Shadow */
+        .envelope-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(180deg, rgba(255,200,220,0.4) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Envelope Heart Seal */
+        .envelope-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            z-index: 15;
+            filter: drop-shadow(0 3px 8px rgba(200, 50, 100, 0.4));
+            transition: all 0.6s ease;
+            animation: sealPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sealPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .envelope.open .envelope-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0) rotate(180deg);
+        }
+
+        /* Envelope Flap (Top Triangle) */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 110px 160px 0 160px;
+            border-color: #ffc8da transparent transparent transparent;
+            z-index: 20;
+            transform-origin: top center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.4s;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+
+        .envelope-flap::after {
+            content: '';
+            position: absolute;
+            top: -110px;
+            left: -160px;
+            width: 320px;
+            height: 110px;
+            background: linear-gradient(180deg, #ffb8cc 0%, #ffc8da 100%);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        /* Bottom Flap (Decorative) */
+        .envelope-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 160px 100px 160px;
+            border-color: transparent transparent #ffdce8 transparent;
+            z-index: 12;
+        }
+
+        /* Side Flaps */
+        .envelope-side-left,
+        .envelope-side-right {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            z-index: 11;
+        }
+
+        .envelope-side-left {
+            left: 0;
+            border-style: solid;
+            border-width: 110px 0 110px 160px;
+            border-color: transparent transparent transparent #ffe0ec;
+        }
+
+        .envelope-side-right {
+            right: 0;
+            border-style: solid;
+            border-width: 110px 160px 110px 0;
+            border-color: transparent #ffe0ec transparent transparent;
+        }
+
+        /* The Note Card */
+        .note-card {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            background: linear-gradient(180deg, #fffbfc 0%, #fff5f8 100%);
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 200, 220, 0.5);
+            transition: transform 1s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        opacity 0.5s 0.5s ease;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            opacity: 0.95;
+        }
+
+        .envelope.open .note-card {
+            transform: translateX(-50%) translateY(-200px);
+            opacity: 1;
+        }
+
+        /* Note Decorative Elements */
+        .note-card::before {
+            content: '✨';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 20px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .note-card::after {
+            content: '💕';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 18px;
+            animation: sparkle 2s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(10deg); }
+        }
+
+        /* Note Text */
+        .note-text {
+            font-family: 'Dancing Script', 'Indie Flower', cursive;
+            color: #c94c7c;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                0 0 0 3px rgba(255, 180, 200, 0.3);
+            background: #000;
+            position: relative;
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9eb5, #ff6090, #ff9eb5);
+            z-index: 10;
+        }
+
+        .note-video {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+
+        /* Close Button */
+        .close-envelope-btn {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .envelope.open ~ .close-envelope-btn {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition-delay: 1.8s;
+        }
+
+        .close-envelope-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============ RESPONSIVE DESIGN ============ */
         @media (max-width: 768px) {
             .broken-heart {
                 font-size: 100px;
@@ -588,6 +989,56 @@
                 font-size: 1.25rem;
                 padding: 0 15px;
             }
+
+            .envelope {
+                width: 280px;
+                height: 190px;
+            }
+
+            .envelope-flap {
+                border-width: 95px 140px 0 140px;
+            }
+
+            .envelope-flap::after {
+                top: -95px;
+                left: -140px;
+                width: 280px;
+                height: 95px;
+            }
+
+            .envelope-bottom {
+                border-width: 0 140px 85px 140px;
+            }
+
+            .envelope-side-left {
+                border-width: 95px 0 95px 140px;
+            }
+
+            .envelope-side-right {
+                border-width: 95px 140px 95px 0;
+            }
+
+            .note-card {
+                width: 250px;
+                padding: 20px 15px;
+            }
+
+            .envelope.open .note-card {
+                transform: translateX(-50%) translateY(-180px);
+            }
+
+            .note-text {
+                font-size: 1.2rem;
+            }
+
+            .note-video {
+                height: 140px;
+            }
+
+            .surprise-btn {
+                padding: 16px 35px;
+                font-size: 1.05rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -619,16 +1070,69 @@
             .thank-you-header {
                 font-size: 1.1rem;
             }
+
+            .envelope {
+                width: 260px;
+                height: 175px;
+            }
+
+            .envelope-flap {
+                border-width: 88px 130px 0 130px;
+            }
+
+            .envelope-flap::after {
+                top: -88px;
+                left: -130px;
+                width: 260px;
+                height: 88px;
+            }
+
+            .envelope-bottom {
+                border-width: 0 130px 80px 130px;
+            }
+
+            .envelope-side-left {
+                border-width: 88px 0 88px 130px;
+            }
+
+            .envelope-side-right {
+                border-width: 88px 130px 88px 0;
+            }
+
+            .note-card {
+                width: 230px;
+                padding: 18px 12px;
+            }
+
+            .envelope.open .note-card {
+                transform: translateX(-50%) translateY(-160px);
+            }
+
+            .note-text {
+                font-size: 1.1rem;
+            }
+
+            .note-video {
+                height: 120px;
+            }
+
+            .surprise-btn {
+                padding: 14px 28px;
+                font-size: 1rem;
+            }
+
+            .close-envelope-btn {
+                padding: 12px 28px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <!-- Background Music -->
-    <!-- Removed 'loop' from bg1 so we can detect when it ends -->
-    <audio id="bg1" src="song1.mp3" preload="auto" autoplay></audio>
+    <audio id="bg1" src="song1.mp3" preload="auto"></audio>
     <audio id="bg2" src="song2.mp3" loop preload="auto"></audio>
-    <iframe src="song1.mp3" allow="autoplay" id="audioIframe" style="display:none"></iframe>
 
     <!-- Cherry Blossom Petals -->
     <div class="petals-container" id="petalsContainer"></div>
@@ -654,7 +1158,7 @@
         </div>
 
         <p class="waiting-message" id="waitingMessage">
-            Let the song finish… then my heart will speak.
+            Let the song finish… what comes next means a lot.
         </p>
     </section>
 
@@ -666,21 +1170,58 @@
 
         <div class="letter-container">
             <div class="letter-content" id="letterContent"></div>
+
+            <!-- Surprise Button (Appears after typing completes) -->
+            <div class="surprise-btn-container" id="surpriseBtnContainer">
+                <button class="surprise-btn" id="surpriseBtn">
+                    Open this… I made something for you 💗
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- MODAL POPUP -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="introModalOverlay">
         <div class="modal-content">
             <p class="modal-text">
-                Wait, Begum… this song isn’t just a song.<br>
-                It’s everything I couldn’t say properly in words.<br>
-                Please listen to it till the end — it’s my feelings for you.
+                This isn't just a song.
+                It's everything I felt but couldn't say.
+                Please let it play… just feel me for a moment.
             </p>
             <p class="modal-subtitle">
-                When it finishes, my heart will speak to you in the letter.
+                When the song ends… just feel me.
             </p>
-            <button class="modal-btn" id="modalBtn">Okay… I’ll listen 💗</button>
+            <button class="modal-btn" id="modalBtn">Okay… I'll listen 💗</button>
+        </div>
+    </div>
+
+    <!-- ENVELOPE OVERLAY -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <!-- Petal Burst Container -->
+        <div class="envelope-petals" id="envelopePetals"></div>
+        
+        <div class="envelope-wrapper">
+            <div class="envelope" id="envelope">
+                <!-- Envelope Structure -->
+                <div class="envelope-body"></div>
+                <div class="envelope-side-left"></div>
+                <div class="envelope-side-right"></div>
+                <div class="envelope-bottom"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-seal">💖</div>
+                
+                <!-- Note Card (Inside Envelope) -->
+                <div class="note-card">
+                    <p class="note-text">I made this for you…<br>please watch it.</p>
+                    <div class="video-container">
+                        <video class="note-video" id="surpriseVideo" controls playsinline>
+                            <source src="video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <button class="close-envelope-btn" id="closeEnvelopeBtn">Close & Return 💕</button>
         </div>
     </div>
 
@@ -727,96 +1268,80 @@
         const bg2 = document.getElementById('bg2');
 
         // Modal Elements
-        const modalOverlay = document.getElementById('modalOverlay');
+        const introModalOverlay = document.getElementById('introModalOverlay');
         const modalBtn = document.getElementById('modalBtn');
+
+        // Envelope Elements
+        const surpriseBtnContainer = document.getElementById('surpriseBtnContainer');
+        const surpriseBtn = document.getElementById('surpriseBtn');
+        const envelopeOverlay = document.getElementById('envelopeOverlay');
+        const envelope = document.getElementById('envelope');
+        const envelopePetals = document.getElementById('envelopePetals');
+        const surpriseVideo = document.getElementById('surpriseVideo');
+        const closeEnvelopeBtn = document.getElementById('closeEnvelopeBtn');
 
         // ============ STATE VARIABLES ============
         let yesButtonScale = 1;
         let noClickCount = 0;
         let isTransitioning = false;
+        let song1HasEnded = false;
+        let userClickedYes = false;
 
-        // ============ FORCE AUTOPLAY STRATEGY ============
-        let checkPlayInterval; // Global variable to control the retry loop
+        // ============ AUDIO SETUP ============
+        bg1.volume = 0.6;
+        bg2.volume = 0.6;
 
+        // ============ SONG 1 PLAY FUNCTION ============
         function startSong1() {
-            bg1.volume = 0.6;
-            bg2.volume = 0.6;
-
-            // 1. Try standard play immediately
-            const playPromise = bg1.play();
-            if (playPromise) {
-                playPromise.catch(e => {
-                    console.log("Standard autoplay failed, trying other methods...");
-                    // 2. Try again after a short delay (sometimes works on fast loads)
-                    setTimeout(() => {
-                        bg1.play().catch(() => { });
-                    }, 1000);
-                });
-            }
-
-            // 3. Fallback: Check constantly if we can play
-            checkPlayInterval = setInterval(() => {
-                if (bg1.paused) {
-                    bg1.play().then(() => {
-                        clearInterval(checkPlayInterval);
-                        // Remove fallback iframe if it exists
-                        const iframe = document.getElementById('audioIframe');
-                        if (iframe) iframe.remove();
-                    }).catch(() => {
-                        // Keep trying
-                    });
-                } else {
-                    clearInterval(checkPlayInterval);
-                }
-            }, 2000);
-
-            // 4. Interaction backup (just in case browser is ultra strict)
-            const forcePlay = () => {
-                bg1.play().catch(() => { });
-                // Once touched, we can stop the forceful checking
-                if (checkPlayInterval) clearInterval(checkPlayInterval);
-                removeListeners();
-            };
-
-            const removeListeners = () => {
-                document.body.removeEventListener('click', forcePlay);
-                document.body.removeEventListener('touchstart', forcePlay);
-                document.body.removeEventListener('keydown', forcePlay);
-                document.body.removeEventListener('mousemove', forcePlay);
-                document.body.removeEventListener('scroll', forcePlay);
-            };
-
-            document.body.addEventListener('click', forcePlay, { capture: true, once: true });
-            document.body.addEventListener('touchstart', forcePlay, { capture: true, once: true });
-            document.body.addEventListener('keydown', forcePlay, { capture: true, once: true });
-            document.body.addEventListener('mousemove', forcePlay, { capture: true, once: true });
-            document.body.addEventListener('scroll', forcePlay, { capture: true, once: true });
+            if (song1HasEnded) return;
+            bg1.currentTime = 0;
+            bg1.play().then(() => {
+                console.log("Song 1 started playing");
+            }).catch(e => {
+                console.log("Autoplay blocked, waiting for interaction...");
+            });
         }
 
-        // Triggered automatically when Song 1 finishes
+        // ============ INTERACTION FALLBACK ============
+        function setupInteractionFallback() {
+            const tryPlay = () => {
+                if (!song1HasEnded && bg1.paused) {
+                    bg1.play().catch(() => { });
+                }
+            };
+            document.addEventListener('click', tryPlay, { once: true });
+            document.addEventListener('touchstart', tryPlay, { once: true });
+        }
+
+        // ============ SONG 1 ENDED EVENT ============
         bg1.addEventListener('ended', () => {
-            console.log("Song 1 ended... transition to Page 2");
-            finishTransition();
+            song1HasEnded = true;
+            console.log("Song 1 ended");
+            if (userClickedYes) {
+                finishTransition();
+            }
         });
 
-        function switchToSong2() {
-            // STOP song1 aggressive retry loop
-            if (checkPlayInterval) clearInterval(checkPlayInterval);
-
-            // We don't need to pause bg1 here because it just ended
-            // But we can ensure it's not playing just in case
+        // ============ START SONG 2 ============
+        function startSong2() {
             bg1.pause();
-
-            // Remove fallback iframe if it still exists
-            const iframe = document.getElementById('audioIframe');
-            if (iframe) iframe.remove();
-
-            bg2.play().catch(() => { });
+            bg1.currentTime = 0;
+            bg2.currentTime = 0;
+            bg2.play().then(() => {
+                console.log("Song 2 started (loop)");
+            }).catch(e => {
+                document.addEventListener('click', () => bg2.play().catch(() => {}), { once: true });
+            });
         }
 
-        // Start song1 immediately when page loads
-        window.addEventListener('load', startSong1);
-        document.addEventListener('DOMContentLoaded', startSong1);
+        // ============ STOP ALL MUSIC ============
+        function stopAllMusic() {
+            bg1.pause();
+            bg1.currentTime = 0;
+            bg2.pause();
+            bg2.currentTime = 0;
+            console.log("All music stopped");
+        }
 
         // ============ CHERRY BLOSSOM PETALS ============
         const petalTypes = ['🌸', '🌺', '💮', '✿', '❀'];
@@ -831,52 +1356,57 @@
             petal.style.animationDelay = (Math.random() * 2) + 's';
             petalsContainer.appendChild(petal);
 
-            const duration = parseFloat(petal.style.animationDuration) * 1000;
             setTimeout(() => {
-                if (petal.parentNode) {
-                    petal.remove();
-                }
-            }, duration + 3000);
+                if (petal.parentNode) petal.remove();
+            }, parseFloat(petal.style.animationDuration) * 1000 + 3000);
         }
 
         function initPetals() {
-            // Create initial batch
             for (let i = 0; i < 12; i++) {
                 setTimeout(createPetal, i * 200);
             }
-            // Continuous creation
             setInterval(createPetal, 700);
+        }
+
+        // ============ ENVELOPE PETAL BURST ============
+        function createEnvelopePetalBurst() {
+            envelopePetals.innerHTML = '';
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'burst-petal';
+                    petal.textContent = petalTypes[Math.floor(Math.random() * petalTypes.length)];
+                    petal.style.left = (30 + Math.random() * 40) + '%';
+                    petal.style.top = (30 + Math.random() * 20) + '%';
+                    petal.style.animationDelay = (Math.random() * 0.5) + 's';
+                    petal.style.animationDuration = (3 + Math.random() * 2) + 's';
+                    envelopePetals.appendChild(petal);
+
+                    setTimeout(() => {
+                        if (petal.parentNode) petal.remove();
+                    }, 5000);
+                }, i * 80);
+            }
         }
 
         // ============ NO BUTTON BEHAVIOR ============
         btnNo.addEventListener('click', () => {
-            // Try to play song1 if not playing
-            if (bg1.paused) {
+            if (bg1.paused && !song1HasEnded) {
                 bg1.play().catch(() => { });
             }
 
             if (noClickCount >= 5) return;
-
             noClickCount++;
 
-            // Shake and dim heart
             brokenHeart.classList.add('shake', 'dimmed');
+            setTimeout(() => brokenHeart.classList.remove('shake'), 600);
+            setTimeout(() => brokenHeart.classList.remove('dimmed'), 700);
 
-            setTimeout(() => {
-                brokenHeart.classList.remove('shake');
-            }, 600);
-
-            setTimeout(() => {
-                brokenHeart.classList.remove('dimmed');
-            }, 700);
-
-            // Grow YES button
             if (yesButtonScale < 1.7) {
                 yesButtonScale += 0.12;
                 btnYes.style.transform = `scale(${yesButtonScale})`;
             }
 
-            // After 5 clicks, slide out NO button
             if (noClickCount >= 5) {
                 btnNo.classList.add('slide-out');
                 setTimeout(() => {
@@ -886,56 +1416,46 @@
             }
         });
 
-        // ============ YES BUTTON (Modal) BEHAVIOR ============
+        // ============ YES BUTTON BEHAVIOR ============
         btnYes.addEventListener('click', () => {
             if (isTransitioning) return;
-            isTransitioning = true; // Mark as transitioning so we don't double click
+            isTransitioning = true;
 
-            // Ensure song1 is playing
-            if (bg1.paused) {
+            if (bg1.paused && !song1HasEnded) {
                 bg1.play().catch(() => { });
             }
 
-            // Show the modal
-            modalOverlay.classList.add('active');
+            introModalOverlay.classList.add('active');
         });
 
         // ============ MODAL 'OK' BEHAVIOR ============
         modalBtn.addEventListener('click', () => {
-            // Close modal
-            modalOverlay.classList.remove('active');
+            introModalOverlay.classList.remove('active');
+            userClickedYes = true;
 
-            // Disable buttons and show waiting message
             buttonsContainer.classList.add('disabled');
             waitingMessage.classList.add('visible');
 
-            // Heart can pulse a bit while waiting
             brokenHeart.classList.remove('dimmed');
-            brokenHeart.classList.add('healed'); // Just to start the warm pulse, text stays same for now
-            brokenHeart.textContent = '💔'; // Keep it broken for now, until song ends
-            // Override the healed animation to just be a soft pulse if needed, 
-            // but the existing 'healed' class has a nice pulse. 
-            // We want it to "pulse warmly". The current 'healed' animation is 'healPulse'.
-            // That works.
+            brokenHeart.style.animation = 'healPulse 1.5s ease-in-out infinite';
+            brokenHeart.style.filter = 'drop-shadow(0 0 30px rgba(255, 100, 180, 0.6))';
+
+            if (song1HasEnded) {
+                finishTransition();
+            }
         });
 
-        // ============ FINISH TRANSITION (Call when song ends) ============
+        // ============ FINISH TRANSITION ============
         function finishTransition() {
-            // STOP song1 aggressive retry loop IMMEDIATELY
-            if (checkPlayInterval) clearInterval(checkPlayInterval);
-
-            // Heal the heart fully
             brokenHeart.textContent = '❤️';
             brokenHeart.classList.add('healed');
+            brokenHeart.style.animation = '';
+            brokenHeart.style.filter = '';
             heartCrack.classList.add('healed');
-
-            // Hide waiting message
             waitingMessage.classList.remove('visible');
 
-            // Create swirl effect
             createSwirlEffect();
 
-            // Transition to Page 2
             setTimeout(() => {
                 page1.classList.add('page-fade-out');
 
@@ -943,15 +1463,12 @@
                     page1.classList.add('page-hidden');
                     page2.classList.remove('page-hidden');
 
-                    // Switch from song1 to song2
-                    switchToSong2();
+                    startSong2();
 
-                    // Fade in page 2
                     setTimeout(() => {
                         page2.classList.add('page-visible');
                         thankYouHeader.classList.add('visible');
 
-                        // Start letter animation
                         setTimeout(() => {
                             initializeLetterAnimation();
                         }, 800);
@@ -974,31 +1491,24 @@
 
                     const angle = (i / 20) * Math.PI * 2;
                     const distance = 150 + Math.random() * 100;
-                    const tx = Math.cos(angle) * distance;
-                    const ty = Math.sin(angle) * distance - 50;
 
                     petal.style.left = centerX + 'px';
                     petal.style.top = centerY + 'px';
-                    petal.style.setProperty('--tx', tx + 'px');
-                    petal.style.setProperty('--ty', ty + 'px');
+                    petal.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                    petal.style.setProperty('--ty', (Math.sin(angle) * distance - 50) + 'px');
 
                     swirlContainer.appendChild(petal);
-
-                    setTimeout(() => {
-                        petal.remove();
-                    }, 2000);
+                    setTimeout(() => petal.remove(), 2000);
                 }, i * 50);
             }
         }
 
         // ============ LETTER TYPING ANIMATION ============
         let currentParagraphIndex = 0;
-        let isTyping = false;
 
         function initializeLetterAnimation() {
             letterContent.innerHTML = '';
 
-            // Create all paragraph elements
             letterParagraphs.forEach((text, index) => {
                 const p = document.createElement('p');
                 p.className = 'letter-paragraph';
@@ -1007,13 +1517,17 @@
                 letterContent.appendChild(p);
             });
 
-            // Start typing first paragraph
             currentParagraphIndex = 0;
             typeNextParagraph();
         }
 
         function typeNextParagraph() {
             if (currentParagraphIndex >= letterParagraphs.length) {
+                // ✅ LETTER COMPLETE - Show surprise button with delay
+                setTimeout(() => {
+                    surpriseBtnContainer.classList.add('visible');
+                    console.log("Surprise button revealed!");
+                }, 400); // 400ms delay after last paragraph
                 return;
             }
 
@@ -1025,12 +1539,8 @@
             typeParagraph(currentP, fullText, () => {
                 currentP.classList.remove('typing');
                 currentP.classList.add('revealed');
-
                 currentParagraphIndex++;
-
-                // Random delay between paragraphs (400-700ms)
-                const delay = 400 + Math.random() * 300;
-                setTimeout(typeNextParagraph, delay);
+                setTimeout(typeNextParagraph, 400 + Math.random() * 300);
             });
         }
 
@@ -1046,16 +1556,12 @@
 
             function typeChar() {
                 if (i >= html.length) {
-                    // Remove cursor when done
-                    if (cursor.parentNode) {
-                        cursor.remove();
-                    }
+                    if (cursor.parentNode) cursor.remove();
                     element.innerHTML = displayText;
                     if (callback) callback();
                     return;
                 }
 
-                // Handle HTML tags like <br>
                 if (html.substring(i, i + 4) === '<br>') {
                     displayText += '<br>';
                     i += 4;
@@ -1064,21 +1570,75 @@
                     i++;
                 }
 
-                // Update display
                 element.innerHTML = displayText;
                 element.appendChild(cursor);
-
-                // Random delay for natural feel (25-55ms)
-                const delay = 25 + Math.random() * 30;
-                setTimeout(typeChar, delay);
+                setTimeout(typeChar, 25 + Math.random() * 30);
             }
 
             typeChar();
         }
 
+        // ============ SURPRISE BUTTON CLICK ============
+        surpriseBtn.addEventListener('click', () => {
+            // 1. STOP ALL MUSIC IMMEDIATELY
+            stopAllMusic();
+
+            // 2. Show envelope overlay
+            envelopeOverlay.classList.add('active');
+
+            // 3. Create petal burst effect
+            setTimeout(() => {
+                createEnvelopePetalBurst();
+            }, 300);
+
+            // 4. Open envelope after short delay
+            setTimeout(() => {
+                envelope.classList.add('open');
+            }, 600);
+
+            // 5. Try to play video after note slides out
+            setTimeout(() => {
+                surpriseVideo.muted = false;
+                surpriseVideo.play().catch(e => {
+                    console.log("Video autoplay blocked, user must tap to play");
+                });
+            }, 1800);
+        });
+
+        // ============ CLOSE ENVELOPE ============
+        closeEnvelopeBtn.addEventListener('click', () => {
+            // Pause video
+            surpriseVideo.pause();
+            surpriseVideo.currentTime = 0;
+
+            // Hide overlay
+            envelopeOverlay.classList.remove('active');
+
+            // Reset envelope state
+            setTimeout(() => {
+                envelope.classList.remove('open');
+                envelopePetals.innerHTML = '';
+            }, 600);
+
+            // Restart Song 2 from beginning
+            setTimeout(() => {
+                bg2.currentTime = 0;
+                bg2.play().catch(() => {});
+                console.log("Song 2 restarted");
+            }, 300);
+        });
+
         // ============ INITIALIZE ============
         document.addEventListener('DOMContentLoaded', () => {
             initPetals();
+            startSong1();
+            setupInteractionFallback();
+        });
+
+        window.addEventListener('load', () => {
+            if (bg1.paused && !song1HasEnded) {
+                startSong1();
+            }
         });
     </script>
 </body>
