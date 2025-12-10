@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Pragati 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,8 +14,7 @@
             box-sizing: border-box;
         }
 
-        html,
-        body {
+        html, body {
             height: 100%;
             overflow-x: hidden;
         }
@@ -53,15 +51,12 @@
                 opacity: 0;
                 transform: translateY(-60px) rotate(0deg) translateX(0);
             }
-
             10% {
                 opacity: 0.9;
             }
-
             90% {
                 opacity: 0.8;
             }
-
             100% {
                 opacity: 0;
                 transform: translateY(100vh) rotate(720deg) translateX(80px);
@@ -110,27 +105,11 @@
         }
 
         @keyframes weakHeartbeat {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            15% {
-                transform: scale(1.04);
-            }
-
-            30% {
-                transform: scale(1);
-            }
-
-            45% {
-                transform: scale(1.02);
-            }
-
-            60% {
-                transform: scale(1);
-            }
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.04); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.02); }
+            60% { transform: scale(1); }
         }
 
         .broken-heart.dimmed {
@@ -143,49 +122,22 @@
         }
 
         @keyframes heartShake {
-
-            0%,
-            100% {
-                transform: translateX(0) rotate(0deg);
-            }
-
-            15% {
-                transform: translateX(-8px) rotate(-3deg);
-            }
-
-            30% {
-                transform: translateX(8px) rotate(3deg);
-            }
-
-            45% {
-                transform: translateX(-6px) rotate(-2deg);
-            }
-
-            60% {
-                transform: translateX(6px) rotate(2deg);
-            }
-
-            75% {
-                transform: translateX(-3px) rotate(-1deg);
-            }
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            15% { transform: translateX(-8px) rotate(-3deg); }
+            30% { transform: translateX(8px) rotate(3deg); }
+            45% { transform: translateX(-6px) rotate(-2deg); }
+            60% { transform: translateX(6px) rotate(2deg); }
+            75% { transform: translateX(-3px) rotate(-1deg); }
         }
 
         .broken-heart.healed {
             animation: healPulse 1.5s ease-in-out infinite;
             filter: drop-shadow(0 0 50px rgba(255, 100, 180, 0.8)) drop-shadow(0 0 80px rgba(255, 50, 150, 0.5));
-            color: #ff3366;
         }
 
         @keyframes healPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .heart-crack {
@@ -245,18 +197,10 @@
         }
 
         @keyframes textFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Waiting Message Style */
         .waiting-message {
             margin-top: 20px;
             font-size: 1rem;
@@ -274,15 +218,8 @@
         }
 
         @keyframes pulseText {
-
-            0%,
-            100% {
-                opacity: 0.7;
-            }
-
-            50% {
-                opacity: 1;
-            }
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .buttons-container {
@@ -328,15 +265,8 @@
         }
 
         @keyframes slideOutLeft {
-            0% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateX(-200px);
-            }
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(-200px); }
         }
 
         .btn-yes {
@@ -351,7 +281,7 @@
             box-shadow: 0 15px 40px rgba(255, 92, 141, 0.4);
         }
 
-        /* Swirl effect container */
+        /* Swirl container */
         .swirl-container {
             position: fixed;
             top: 0;
@@ -370,15 +300,8 @@
         }
 
         @keyframes swirlAround {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0.3);
-            }
+            0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0.3); }
         }
 
         /* ============ MODAL STYLES ============ */
@@ -532,32 +455,23 @@
         }
 
         @keyframes cursorBlink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        /* ============ SURPRISE ENVELOPE BUTTON ============ */
+        /* ============ SURPRISE BUTTON ============ */
         .surprise-btn-container {
             margin-top: 50px;
             text-align: center;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            visibility: hidden;
             pointer-events: none;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .surprise-btn-container.visible {
             opacity: 1;
             transform: translateY(0);
-            visibility: visible;
             pointer-events: auto;
         }
 
@@ -571,51 +485,21 @@
             font-size: 1.15rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 
-                0 10px 40px rgba(255, 122, 160, 0.4),
-                0 0 0 0 rgba(255, 150, 180, 0.4);
+            box-shadow: 0 10px 40px rgba(255, 122, 160, 0.4);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            animation: gentlePulse 2s ease-in-out infinite;
+            animation: btnPulse 2s ease-in-out infinite;
         }
 
-        @keyframes gentlePulse {
-            0%, 100% {
-                box-shadow: 
-                    0 10px 40px rgba(255, 122, 160, 0.4),
-                    0 0 0 0 rgba(255, 150, 180, 0.4);
-            }
-            50% {
-                box-shadow: 
-                    0 15px 50px rgba(255, 122, 160, 0.5),
-                    0 0 0 10px rgba(255, 150, 180, 0);
-            }
-        }
-
-        .surprise-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .surprise-btn:hover::before {
-            left: 100%;
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 10px 40px rgba(255, 122, 160, 0.4); }
+            50% { box-shadow: 0 15px 50px rgba(255, 122, 160, 0.6); }
         }
 
         .surprise-btn:hover {
             transform: translateY(-4px) scale(1.03);
             box-shadow: 0 20px 50px rgba(255, 122, 160, 0.5);
-            background: linear-gradient(135deg, #ff8fae 0%, #ff6b95 50%, #ff5085 100%);
-        }
-
-        .surprise-btn:active {
-            transform: translateY(-2px) scale(1.01);
         }
 
         /* ============ ENVELOPE OVERLAY ============ */
@@ -625,21 +509,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(60, 20, 40, 0.7) 0%, rgba(30, 10, 20, 0.85) 100%);
+            background: radial-gradient(ellipse at center, rgba(60, 20, 40, 0.75) 0%, rgba(30, 10, 20, 0.9) 100%);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            z-index: 2000;
-            display: flex;
+            z-index: 9999;
+            display: none;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            visibility: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.6s ease;
         }
 
         .envelope-overlay.active {
+            display: flex;
             opacity: 1;
-            visibility: visible;
         }
 
         /* Envelope Petals Burst */
@@ -651,6 +534,7 @@
             height: 100%;
             pointer-events: none;
             overflow: hidden;
+            z-index: 1;
         }
 
         .burst-petal {
@@ -661,23 +545,15 @@
         }
 
         @keyframes burstFall {
-            0% {
-                opacity: 0;
-                transform: translateY(0) rotate(0deg) scale(0.5);
-            }
-            10% {
-                opacity: 1;
-                transform: translateY(-20px) rotate(45deg) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(100vh) rotate(720deg) scale(0.3);
-            }
+            0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.5); }
+            10% { opacity: 1; transform: translateY(-20px) rotate(45deg) scale(1); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.3); }
         }
 
         /* Envelope Wrapper */
         .envelope-wrapper {
             position: relative;
+            z-index: 10;
             transform: scale(0.7) translateY(50px);
             opacity: 0;
             transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -707,22 +583,7 @@
             height: 100%;
             background: linear-gradient(180deg, #ffe8f0 0%, #ffd4e3 100%);
             border-radius: 8px;
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.3),
-                inset 0 -5px 15px rgba(255, 180, 200, 0.3);
-            overflow: hidden;
-        }
-
-        /* Envelope Inner Shadow */
-        .envelope-body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(180deg, rgba(255,200,220,0.4) 0%, transparent 100%);
-            pointer-events: none;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
         }
 
         /* Envelope Heart Seal */
@@ -732,7 +593,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 40px;
-            z-index: 15;
+            z-index: 25;
             filter: drop-shadow(0 3px 8px rgba(200, 50, 100, 0.4));
             transition: all 0.6s ease;
             animation: sealPulse 1.5s ease-in-out infinite;
@@ -748,7 +609,7 @@
             transform: translate(-50%, -50%) scale(0) rotate(180deg);
         }
 
-        /* Envelope Flap (Top Triangle) */
+        /* Envelope Flap */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -758,29 +619,17 @@
             border-style: solid;
             border-width: 110px 160px 0 160px;
             border-color: #ffc8da transparent transparent transparent;
-            z-index: 20;
+            z-index: 30;
             transform-origin: top center;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.4s;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-        }
-
-        .envelope-flap::after {
-            content: '';
-            position: absolute;
-            top: -110px;
-            left: -160px;
-            width: 320px;
-            height: 110px;
-            background: linear-gradient(180deg, #ffb8cc 0%, #ffc8da 100%);
-            clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
 
         .envelope.open .envelope-flap {
             transform: rotateX(180deg);
-            z-index: 0;
+            z-index: 1;
         }
 
-        /* Bottom Flap (Decorative) */
+        /* Bottom Flap */
         .envelope-bottom {
             position: absolute;
             bottom: 0;
@@ -790,31 +639,32 @@
             border-style: solid;
             border-width: 0 160px 100px 160px;
             border-color: transparent transparent #ffdce8 transparent;
-            z-index: 12;
+            z-index: 20;
         }
 
         /* Side Flaps */
-        .envelope-side-left,
-        .envelope-side-right {
+        .envelope-side-left {
             position: absolute;
             bottom: 0;
+            left: 0;
             width: 0;
             height: 0;
-            z-index: 11;
-        }
-
-        .envelope-side-left {
-            left: 0;
             border-style: solid;
             border-width: 110px 0 110px 160px;
             border-color: transparent transparent transparent #ffe0ec;
+            z-index: 15;
         }
 
         .envelope-side-right {
+            position: absolute;
+            bottom: 0;
             right: 0;
+            width: 0;
+            height: 0;
             border-style: solid;
             border-width: 110px 160px 110px 0;
             border-color: transparent #ffe0ec transparent transparent;
+            z-index: 15;
         }
 
         /* The Note Card */
@@ -822,30 +672,24 @@
             position: absolute;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(0);
             width: 280px;
             background: linear-gradient(180deg, #fffbfc 0%, #fff5f8 100%);
             border-radius: 16px;
             padding: 25px 20px;
-            box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(255, 200, 220, 0.5);
-            transition: transform 1s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                        opacity 0.5s 0.5s ease;
-            z-index: 5;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 1s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            opacity: 0.95;
         }
 
         .envelope.open .note-card {
             transform: translateX(-50%) translateY(-200px);
-            opacity: 1;
         }
 
-        /* Note Decorative Elements */
         .note-card::before {
             content: '✨';
             position: absolute;
@@ -865,19 +709,17 @@
         }
 
         @keyframes sparkle {
-            0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1.2) rotate(10deg); }
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Note Text */
         .note-text {
-            font-family: 'Dancing Script', 'Indie Flower', cursive;
+            font-family: 'Dancing Script', cursive;
             color: #c94c7c;
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 20px;
             line-height: 1.5;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
 
         /* Video Container */
@@ -885,22 +727,8 @@
             width: 100%;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.15),
-                0 0 0 3px rgba(255, 180, 200, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             background: #000;
-            position: relative;
-        }
-
-        .video-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff9eb5, #ff6090, #ff9eb5);
-            z-index: 10;
         }
 
         .note-video {
@@ -908,7 +736,6 @@
             height: 160px;
             object-fit: cover;
             display: block;
-            border-radius: 10px;
         }
 
         /* Close Button */
@@ -927,7 +754,6 @@
             opacity: 0;
             transform: translateY(20px);
             pointer-events: none;
-            backdrop-filter: blur(5px);
         }
 
         .envelope.open ~ .close-envelope-btn {
@@ -939,192 +765,47 @@
 
         .close-envelope-btn:hover {
             background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
         }
 
-        /* ============ RESPONSIVE DESIGN ============ */
+        /* ============ RESPONSIVE ============ */
         @media (max-width: 768px) {
-            .broken-heart {
-                font-size: 100px;
-            }
+            .broken-heart { font-size: 100px; }
+            .heart-crack { height: 55px; }
+            .message-text { font-size: 1.1rem; padding: 0 15px; }
+            .btn { padding: 14px 26px; font-size: 1rem; }
+            .letter-container { padding: 35px 28px; margin: 0 15px; }
+            .letter-content { font-size: 1rem; }
+            .thank-you-header { font-size: 1.25rem; }
 
-            .heart-crack {
-                height: 55px;
-            }
-
-            .heart-crack::before,
-            .heart-crack::after {
-                height: 22px;
-            }
-
-            .message-text {
-                font-size: 1.1rem;
-                padding: 0 15px;
-                line-height: 1.9;
-            }
-
-            .btn {
-                padding: 14px 26px;
-                font-size: 1rem;
-            }
-
-            .buttons-container {
-                gap: 18px;
-            }
-
-            .letter-container {
-                padding: 35px 28px;
-                margin: 0 15px;
-                border-radius: 24px;
-            }
-
-            .letter-content {
-                font-size: 1rem;
-                line-height: 1.9;
-            }
-
-            .thank-you-header {
-                font-size: 1.25rem;
-                padding: 0 15px;
-            }
-
-            .envelope {
-                width: 280px;
-                height: 190px;
-            }
-
-            .envelope-flap {
-                border-width: 95px 140px 0 140px;
-            }
-
-            .envelope-flap::after {
-                top: -95px;
-                left: -140px;
-                width: 280px;
-                height: 95px;
-            }
-
-            .envelope-bottom {
-                border-width: 0 140px 85px 140px;
-            }
-
-            .envelope-side-left {
-                border-width: 95px 0 95px 140px;
-            }
-
-            .envelope-side-right {
-                border-width: 95px 140px 95px 0;
-            }
-
-            .note-card {
-                width: 250px;
-                padding: 20px 15px;
-            }
-
-            .envelope.open .note-card {
-                transform: translateX(-50%) translateY(-180px);
-            }
-
-            .note-text {
-                font-size: 1.2rem;
-            }
-
-            .note-video {
-                height: 140px;
-            }
-
-            .surprise-btn {
-                padding: 16px 35px;
-                font-size: 1.05rem;
-            }
+            .envelope { width: 280px; height: 190px; }
+            .envelope-flap { border-width: 95px 140px 0 140px; }
+            .envelope-bottom { border-width: 0 140px 85px 140px; }
+            .envelope-side-left { border-width: 95px 0 95px 140px; }
+            .envelope-side-right { border-width: 95px 140px 95px 0; }
+            .note-card { width: 250px; padding: 20px 15px; }
+            .envelope.open .note-card { transform: translateX(-50%) translateY(-180px); }
+            .note-video { height: 140px; }
+            .surprise-btn { padding: 16px 35px; font-size: 1.05rem; }
         }
 
         @media (max-width: 480px) {
-            .broken-heart {
-                font-size: 80px;
-            }
+            .broken-heart { font-size: 80px; }
+            .heart-crack { height: 45px; }
+            .message-text { font-size: 1rem; }
+            .btn { padding: 12px 22px; font-size: 0.95rem; }
+            .letter-container { padding: 28px 22px; }
+            .letter-content { font-size: 0.95rem; }
 
-            .heart-crack {
-                height: 45px;
-            }
-
-            .message-text {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 12px 22px;
-                font-size: 0.95rem;
-            }
-
-            .letter-container {
-                padding: 28px 22px;
-            }
-
-            .letter-content {
-                font-size: 0.95rem;
-            }
-
-            .thank-you-header {
-                font-size: 1.1rem;
-            }
-
-            .envelope {
-                width: 260px;
-                height: 175px;
-            }
-
-            .envelope-flap {
-                border-width: 88px 130px 0 130px;
-            }
-
-            .envelope-flap::after {
-                top: -88px;
-                left: -130px;
-                width: 260px;
-                height: 88px;
-            }
-
-            .envelope-bottom {
-                border-width: 0 130px 80px 130px;
-            }
-
-            .envelope-side-left {
-                border-width: 88px 0 88px 130px;
-            }
-
-            .envelope-side-right {
-                border-width: 88px 130px 88px 0;
-            }
-
-            .note-card {
-                width: 230px;
-                padding: 18px 12px;
-            }
-
-            .envelope.open .note-card {
-                transform: translateX(-50%) translateY(-160px);
-            }
-
-            .note-text {
-                font-size: 1.1rem;
-            }
-
-            .note-video {
-                height: 120px;
-            }
-
-            .surprise-btn {
-                padding: 14px 28px;
-                font-size: 1rem;
-            }
-
-            .close-envelope-btn {
-                padding: 12px 28px;
-                font-size: 0.9rem;
-            }
+            .envelope { width: 260px; height: 175px; }
+            .envelope-flap { border-width: 88px 130px 0 130px; }
+            .envelope-bottom { border-width: 0 130px 80px 130px; }
+            .envelope-side-left { border-width: 88px 0 88px 130px; }
+            .envelope-side-right { border-width: 88px 130px 88px 0; }
+            .note-card { width: 230px; }
+            .envelope.open .note-card { transform: translateX(-50%) translateY(-160px); }
+            .note-video { height: 120px; }
+            .surprise-btn { padding: 14px 28px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -1140,7 +821,7 @@
     <!-- Swirl Effect Container -->
     <div class="swirl-container" id="swirlContainer"></div>
 
-    <!-- PAGE 1: Broken Heart -->
+    <!-- PAGE 1 -->
     <section id="page1">
         <div class="heart-wrapper">
             <div class="broken-heart" id="brokenHeart">💔</div>
@@ -1162,7 +843,7 @@
         </p>
     </section>
 
-    <!-- PAGE 2: Apology Letter -->
+    <!-- PAGE 2 -->
     <section id="page2" class="page-hidden">
         <h2 class="thank-you-header" id="thankYouHeader">
             Please... just hear what my heart is trying to say...
@@ -1171,7 +852,6 @@
         <div class="letter-container">
             <div class="letter-content" id="letterContent"></div>
 
-            <!-- Surprise Button (Appears after typing completes) -->
             <div class="surprise-btn-container" id="surpriseBtnContainer">
                 <button class="surprise-btn" id="surpriseBtn">
                     Open this… I made something for you 💗
@@ -1180,7 +860,7 @@
         </div>
     </section>
 
-    <!-- MODAL POPUP -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="introModalOverlay">
         <div class="modal-content">
             <p class="modal-text">
@@ -1197,12 +877,10 @@
 
     <!-- ENVELOPE OVERLAY -->
     <div class="envelope-overlay" id="envelopeOverlay">
-        <!-- Petal Burst Container -->
         <div class="envelope-petals" id="envelopePetals"></div>
         
         <div class="envelope-wrapper">
             <div class="envelope" id="envelope">
-                <!-- Envelope Structure -->
                 <div class="envelope-body"></div>
                 <div class="envelope-side-left"></div>
                 <div class="envelope-side-right"></div>
@@ -1210,7 +888,6 @@
                 <div class="envelope-flap"></div>
                 <div class="envelope-seal">💖</div>
                 
-                <!-- Note Card (Inside Envelope) -->
                 <div class="note-card">
                     <p class="note-text">I made this for you…<br>please watch it.</p>
                     <div class="video-container">
@@ -1266,12 +943,8 @@
         const thankYouHeader = document.getElementById('thankYouHeader');
         const bg1 = document.getElementById('bg1');
         const bg2 = document.getElementById('bg2');
-
-        // Modal Elements
         const introModalOverlay = document.getElementById('introModalOverlay');
         const modalBtn = document.getElementById('modalBtn');
-
-        // Envelope Elements
         const surpriseBtnContainer = document.getElementById('surpriseBtnContainer');
         const surpriseBtn = document.getElementById('surpriseBtn');
         const envelopeOverlay = document.getElementById('envelopeOverlay');
@@ -1280,70 +953,20 @@
         const surpriseVideo = document.getElementById('surpriseVideo');
         const closeEnvelopeBtn = document.getElementById('closeEnvelopeBtn');
 
-        // ============ STATE VARIABLES ============
+        // ============ STATE ============
         let yesButtonScale = 1;
         let noClickCount = 0;
         let isTransitioning = false;
-        let song1HasEnded = false;
+        let song1Ended = false;
         let userClickedYes = false;
+        let song1Started = false;
+        let song2Started = false;
 
         // ============ AUDIO SETUP ============
         bg1.volume = 0.6;
         bg2.volume = 0.6;
 
-        // ============ SONG 1 PLAY FUNCTION ============
-        function startSong1() {
-            if (song1HasEnded) return;
-            bg1.currentTime = 0;
-            bg1.play().then(() => {
-                console.log("Song 1 started playing");
-            }).catch(e => {
-                console.log("Autoplay blocked, waiting for interaction...");
-            });
-        }
-
-        // ============ INTERACTION FALLBACK ============
-        function setupInteractionFallback() {
-            const tryPlay = () => {
-                if (!song1HasEnded && bg1.paused) {
-                    bg1.play().catch(() => { });
-                }
-            };
-            document.addEventListener('click', tryPlay, { once: true });
-            document.addEventListener('touchstart', tryPlay, { once: true });
-        }
-
-        // ============ SONG 1 ENDED EVENT ============
-        bg1.addEventListener('ended', () => {
-            song1HasEnded = true;
-            console.log("Song 1 ended");
-            if (userClickedYes) {
-                finishTransition();
-            }
-        });
-
-        // ============ START SONG 2 ============
-        function startSong2() {
-            bg1.pause();
-            bg1.currentTime = 0;
-            bg2.currentTime = 0;
-            bg2.play().then(() => {
-                console.log("Song 2 started (loop)");
-            }).catch(e => {
-                document.addEventListener('click', () => bg2.play().catch(() => {}), { once: true });
-            });
-        }
-
-        // ============ STOP ALL MUSIC ============
-        function stopAllMusic() {
-            bg1.pause();
-            bg1.currentTime = 0;
-            bg2.pause();
-            bg2.currentTime = 0;
-            console.log("All music stopped");
-        }
-
-        // ============ CHERRY BLOSSOM PETALS ============
+        // ============ PETALS ============
         const petalTypes = ['🌸', '🌺', '💮', '✿', '❀'];
 
         function createPetal() {
@@ -1358,7 +981,7 @@
 
             setTimeout(() => {
                 if (petal.parentNode) petal.remove();
-            }, parseFloat(petal.style.animationDuration) * 1000 + 3000);
+            }, 15000);
         }
 
         function initPetals() {
@@ -1368,34 +991,77 @@
             setInterval(createPetal, 700);
         }
 
-        // ============ ENVELOPE PETAL BURST ============
-        function createEnvelopePetalBurst() {
-            envelopePetals.innerHTML = '';
-            for (let i = 0; i < 25; i++) {
-                setTimeout(() => {
-                    const petal = document.createElement('div');
-                    petal.className = 'burst-petal';
-                    petal.textContent = petalTypes[Math.floor(Math.random() * petalTypes.length)];
-                    petal.style.left = (30 + Math.random() * 40) + '%';
-                    petal.style.top = (30 + Math.random() * 20) + '%';
-                    petal.style.animationDelay = (Math.random() * 0.5) + 's';
-                    petal.style.animationDuration = (3 + Math.random() * 2) + 's';
-                    envelopePetals.appendChild(petal);
+        // ============ SONG 1 - PLAY ONCE ============
+        function playSong1() {
+            if (song1Started || song1Ended) return;
+            song1Started = true;
+            
+            bg2.pause();
+            bg2.currentTime = 0;
+            
+            bg1.currentTime = 0;
+            bg1.play().then(() => {
+                console.log("✓ Song 1 playing");
+            }).catch(err => {
+                console.log("Song 1 blocked, waiting for click");
+                song1Started = false;
+            });
+        }
 
-                    setTimeout(() => {
-                        if (petal.parentNode) petal.remove();
-                    }, 5000);
-                }, i * 80);
+        // ============ SONG 1 ENDED ============
+        bg1.addEventListener('ended', () => {
+            song1Ended = true;
+            console.log("✓ Song 1 ended");
+            
+            if (userClickedYes) {
+                finishTransition();
+            }
+        });
+
+        // ============ SONG 2 - LOOP ============
+        function playSong2() {
+            if (song2Started) return;
+            song2Started = true;
+            
+            bg1.pause();
+            bg1.currentTime = 0;
+            
+            bg2.currentTime = 0;
+            bg2.play().then(() => {
+                console.log("✓ Song 2 playing (loop)");
+            }).catch(err => {
+                console.log("Song 2 blocked");
+                song2Started = false;
+            });
+        }
+
+        // ============ STOP ALL MUSIC ============
+        function stopAllMusic() {
+            bg1.pause();
+            bg1.currentTime = 0;
+            bg2.pause();
+            bg2.currentTime = 0;
+            song2Started = false;
+            console.log("✓ All music stopped");
+        }
+
+        // ============ USER INTERACTION FALLBACK ============
+        function handleFirstInteraction() {
+            if (!song1Started && !song1Ended) {
+                playSong1();
             }
         }
 
-        // ============ NO BUTTON BEHAVIOR ============
-        btnNo.addEventListener('click', () => {
-            if (bg1.paused && !song1HasEnded) {
-                bg1.play().catch(() => { });
-            }
+        document.addEventListener('click', handleFirstInteraction, { once: true });
+        document.addEventListener('touchstart', handleFirstInteraction, { once: true });
 
+        // ============ NO BUTTON ============
+        btnNo.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            if (!song1Started) playSong1();
             if (noClickCount >= 5) return;
+
             noClickCount++;
 
             brokenHeart.classList.add('shake', 'dimmed');
@@ -1410,42 +1076,42 @@
             if (noClickCount >= 5) {
                 btnNo.classList.add('slide-out');
                 setTimeout(() => {
-                    btnNo.style.visibility = 'hidden';
                     btnNo.style.display = 'none';
                 }, 800);
             }
         });
 
-        // ============ YES BUTTON BEHAVIOR ============
-        btnYes.addEventListener('click', () => {
+        // ============ YES BUTTON ============
+        btnYes.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
             if (isTransitioning) return;
             isTransitioning = true;
 
-            if (bg1.paused && !song1HasEnded) {
-                bg1.play().catch(() => { });
-            }
+            if (!song1Started) playSong1();
 
             introModalOverlay.classList.add('active');
         });
 
-        // ============ MODAL 'OK' BEHAVIOR ============
-        modalBtn.addEventListener('click', () => {
+        // ============ MODAL OK ============
+        modalBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
             introModalOverlay.classList.remove('active');
             userClickedYes = true;
 
             buttonsContainer.classList.add('disabled');
             waitingMessage.classList.add('visible');
 
-            brokenHeart.classList.remove('dimmed');
             brokenHeart.style.animation = 'healPulse 1.5s ease-in-out infinite';
             brokenHeart.style.filter = 'drop-shadow(0 0 30px rgba(255, 100, 180, 0.6))';
 
-            if (song1HasEnded) {
+            if (song1Ended) {
                 finishTransition();
             }
         });
 
-        // ============ FINISH TRANSITION ============
+        // ============ TRANSITION TO PAGE 2 ============
         function finishTransition() {
             brokenHeart.textContent = '❤️';
             brokenHeart.classList.add('healed');
@@ -1463,7 +1129,7 @@
                     page1.classList.add('page-hidden');
                     page2.classList.remove('page-hidden');
 
-                    startSong2();
+                    playSong2();
 
                     setTimeout(() => {
                         page2.classList.add('page-visible');
@@ -1479,9 +1145,9 @@
 
         // ============ SWIRL EFFECT ============
         function createSwirlEffect() {
-            const heartRect = brokenHeart.getBoundingClientRect();
-            const centerX = heartRect.left + heartRect.width / 2;
-            const centerY = heartRect.top + heartRect.height / 2;
+            const rect = brokenHeart.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
 
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
@@ -1490,12 +1156,12 @@
                     petal.textContent = petalTypes[Math.floor(Math.random() * petalTypes.length)];
 
                     const angle = (i / 20) * Math.PI * 2;
-                    const distance = 150 + Math.random() * 100;
+                    const dist = 150 + Math.random() * 100;
 
-                    petal.style.left = centerX + 'px';
-                    petal.style.top = centerY + 'px';
-                    petal.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
-                    petal.style.setProperty('--ty', (Math.sin(angle) * distance - 50) + 'px');
+                    petal.style.left = cx + 'px';
+                    petal.style.top = cy + 'px';
+                    petal.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                    petal.style.setProperty('--ty', (Math.sin(angle) * dist - 50) + 'px');
 
                     swirlContainer.appendChild(petal);
                     setTimeout(() => petal.remove(), 2000);
@@ -1503,7 +1169,7 @@
             }
         }
 
-        // ============ LETTER TYPING ANIMATION ============
+        // ============ LETTER ANIMATION ============
         let currentParagraphIndex = 0;
 
         function initializeLetterAnimation() {
@@ -1512,7 +1178,6 @@
             letterParagraphs.forEach((text, index) => {
                 const p = document.createElement('p');
                 p.className = 'letter-paragraph';
-                p.setAttribute('data-index', index);
                 p.setAttribute('data-text', text);
                 letterContent.appendChild(p);
             });
@@ -1523,11 +1188,11 @@
 
         function typeNextParagraph() {
             if (currentParagraphIndex >= letterParagraphs.length) {
-                // ✅ LETTER COMPLETE - Show surprise button with delay
+                // DONE - Show surprise button
+                console.log("✓ Letter complete, showing button");
                 setTimeout(() => {
                     surpriseBtnContainer.classList.add('visible');
-                    console.log("Surprise button revealed!");
-                }, 400); // 400ms delay after last paragraph
+                }, 500);
                 return;
             }
 
@@ -1550,7 +1215,6 @@
 
             const cursor = document.createElement('span');
             cursor.className = 'typing-cursor';
-
             element.innerHTML = '';
             element.appendChild(cursor);
 
@@ -1578,67 +1242,78 @@
             typeChar();
         }
 
+        // ============ ENVELOPE PETAL BURST ============
+        function createEnvelopePetalBurst() {
+            envelopePetals.innerHTML = '';
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'burst-petal';
+                    petal.textContent = petalTypes[Math.floor(Math.random() * petalTypes.length)];
+                    petal.style.left = (30 + Math.random() * 40) + '%';
+                    petal.style.top = (30 + Math.random() * 20) + '%';
+                    petal.style.animationDelay = (Math.random() * 0.5) + 's';
+                    envelopePetals.appendChild(petal);
+
+                    setTimeout(() => petal.remove(), 5000);
+                }, i * 80);
+            }
+        }
+
         // ============ SURPRISE BUTTON CLICK ============
-        surpriseBtn.addEventListener('click', () => {
-            // 1. STOP ALL MUSIC IMMEDIATELY
+        surpriseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log("✓ Surprise button clicked");
+
+            // STOP ALL MUSIC
             stopAllMusic();
 
-            // 2. Show envelope overlay
+            // Show envelope overlay
             envelopeOverlay.classList.add('active');
 
-            // 3. Create petal burst effect
-            setTimeout(() => {
-                createEnvelopePetalBurst();
-            }, 300);
+            // Petal burst
+            setTimeout(createEnvelopePetalBurst, 300);
 
-            // 4. Open envelope after short delay
+            // Open envelope
             setTimeout(() => {
                 envelope.classList.add('open');
+                console.log("✓ Envelope opened");
             }, 600);
 
-            // 5. Try to play video after note slides out
+            // Play video
             setTimeout(() => {
                 surpriseVideo.muted = false;
-                surpriseVideo.play().catch(e => {
-                    console.log("Video autoplay blocked, user must tap to play");
+                surpriseVideo.play().catch(err => {
+                    console.log("Video autoplay blocked");
                 });
             }, 1800);
         });
 
         // ============ CLOSE ENVELOPE ============
-        closeEnvelopeBtn.addEventListener('click', () => {
-            // Pause video
+        closeEnvelopeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
             surpriseVideo.pause();
             surpriseVideo.currentTime = 0;
 
-            // Hide overlay
             envelopeOverlay.classList.remove('active');
 
-            // Reset envelope state
             setTimeout(() => {
                 envelope.classList.remove('open');
                 envelopePetals.innerHTML = '';
             }, 600);
 
-            // Restart Song 2 from beginning
+            // Restart song 2
             setTimeout(() => {
-                bg2.currentTime = 0;
-                bg2.play().catch(() => {});
-                console.log("Song 2 restarted");
+                song2Started = false;
+                playSong2();
             }, 300);
         });
 
-        // ============ INITIALIZE ============
+        // ============ INIT ============
         document.addEventListener('DOMContentLoaded', () => {
             initPetals();
-            startSong1();
-            setupInteractionFallback();
-        });
-
-        window.addEventListener('load', () => {
-            if (bg1.paused && !song1HasEnded) {
-                startSong1();
-            }
+            playSong1();
         });
     </script>
 </body>
