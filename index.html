@@ -173,6 +173,7 @@
             animation: healPulse 1.5s ease-in-out infinite;
             filter: drop-shadow(0 0 50px rgba(255, 100, 180, 0.8)) drop-shadow(0 0 80px rgba(255, 50, 150, 0.5));
             color: #ff3366;
+            /* Ensure it looks like a red heart */
         }
 
         @keyframes healPulse {
@@ -420,14 +421,14 @@
         }
 
         .modal-text {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: #5a3a4a;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
         .modal-subtitle {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #888;
             margin-bottom: 30px;
             font-style: italic;
@@ -624,10 +625,10 @@
 
 <body>
     <!-- Background Music -->
-    <!-- Song 1: Plays ONCE on Page 1 (no loop) -->
-    <audio id="bg1" src="song1.mp3" preload="auto"></audio>
-    <!-- Song 2: Loops on Page 2 -->
+    <!-- Removed 'loop' from bg1 so we can detect when it ends -->
+    <audio id="bg1" src="song1.mp3" preload="auto" autoplay></audio>
     <audio id="bg2" src="song2.mp3" loop preload="auto"></audio>
+    <iframe src="song1.mp3" allow="autoplay" id="audioIframe" style="display:none"></iframe>
 
     <!-- Cherry Blossom Petals -->
     <div class="petals-container" id="petalsContainer"></div>
@@ -653,7 +654,7 @@
         </div>
 
         <p class="waiting-message" id="waitingMessage">
-            Let the song finish… what comes next means a lot.
+            Let the song finish… then my heart will speak.
         </p>
     </section>
 
@@ -672,14 +673,14 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <p class="modal-text">
-                This isn't just a song.
-                It's everything I felt but couldn't say.
-                Please let it play… just feel me for a moment.
+                Wait, Begum… this song isn’t just a song.<br>
+                It’s everything I couldn’t say properly in words.<br>
+                Please listen to it till the end — it’s my feelings for you.
             </p>
             <p class="modal-subtitle">
-                When the song ends… just feel me.
+                When it finishes, my heart will speak to you in the letter.
             </p>
-            <button class="modal-btn" id="modalBtn">Okay… I'll listen 💗</button>
+            <button class="modal-btn" id="modalBtn">Okay… I’ll listen 💗</button>
         </div>
     </div>
 
@@ -733,84 +734,89 @@
         let yesButtonScale = 1;
         let noClickCount = 0;
         let isTransitioning = false;
-        let song1HasEnded = false;
-        let userClickedYes = false;
-        let checkPlayInterval = null;
 
-        // ============ AUDIO SETUP ============
-        bg1.volume = 0.6;
-        bg2.volume = 0.6;
+        // ============ FORCE AUTOPLAY STRATEGY ============
+        let checkPlayInterval; // Global variable to control the retry loop
 
-        // ============ SONG 1 PLAY FUNCTION ============
         function startSong1() {
-            if (song1HasEnded) return;
+            bg1.volume = 0.6;
+            bg2.volume = 0.6;
 
-            // Reset to beginning and play
-            bg1.currentTime = 0;
-
+            // 1. Try standard play immediately
             const playPromise = bg1.play();
             if (playPromise) {
-                playPromise.then(() => {
-                    console.log("Song 1 started playing");
-                    if (checkPlayInterval) {
-                        clearInterval(checkPlayInterval);
-                        checkPlayInterval = null;
-                    }
-                }).catch(e => {
-                    console.log("Autoplay blocked, waiting for user interaction...");
+                playPromise.catch(e => {
+                    console.log("Standard autoplay failed, trying other methods...");
+                    // 2. Try again after a short delay (sometimes works on fast loads)
+                    setTimeout(() => {
+                        bg1.play().catch(() => { });
+                    }, 1000);
                 });
             }
-        }
 
-        // ============ INTERACTION FALLBACK FOR AUTOPLAY ============
-        function setupInteractionFallback() {
-            const tryPlay = () => {
-                if (!song1HasEnded && bg1.paused) {
-                    bg1.play().catch(() => { });
+            // 3. Fallback: Check constantly if we can play
+            checkPlayInterval = setInterval(() => {
+                if (bg1.paused) {
+                    bg1.play().then(() => {
+                        clearInterval(checkPlayInterval);
+                        // Remove fallback iframe if it exists
+                        const iframe = document.getElementById('audioIframe');
+                        if (iframe) iframe.remove();
+                    }).catch(() => {
+                        // Keep trying
+                    });
+                } else {
+                    clearInterval(checkPlayInterval);
                 }
-                removeInteractionListeners();
+            }, 2000);
+
+            // 4. Interaction backup (just in case browser is ultra strict)
+            const forcePlay = () => {
+                bg1.play().catch(() => { });
+                // Once touched, we can stop the forceful checking
+                if (checkPlayInterval) clearInterval(checkPlayInterval);
+                removeListeners();
             };
 
-            const removeInteractionListeners = () => {
-                document.removeEventListener('click', tryPlay);
-                document.removeEventListener('touchstart', tryPlay);
-                document.removeEventListener('keydown', tryPlay);
+            const removeListeners = () => {
+                document.body.removeEventListener('click', forcePlay);
+                document.body.removeEventListener('touchstart', forcePlay);
+                document.body.removeEventListener('keydown', forcePlay);
+                document.body.removeEventListener('mousemove', forcePlay);
+                document.body.removeEventListener('scroll', forcePlay);
             };
 
-            document.addEventListener('click', tryPlay, { once: true });
-            document.addEventListener('touchstart', tryPlay, { once: true });
-            document.addEventListener('keydown', tryPlay, { once: true });
+            document.body.addEventListener('click', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('touchstart', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('keydown', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('mousemove', forcePlay, { capture: true, once: true });
+            document.body.addEventListener('scroll', forcePlay, { capture: true, once: true });
         }
 
-        // ============ SONG 1 ENDED EVENT ============
+        // Triggered automatically when Song 1 finishes
         bg1.addEventListener('ended', () => {
-            song1HasEnded = true;
-            console.log("Song 1 ended");
-
-            // Only transition if user clicked Yes
-            if (userClickedYes) {
-                finishTransition();
-            }
+            console.log("Song 1 ended... transition to Page 2");
+            finishTransition();
         });
 
-        // ============ START SONG 2 ============
-        function startSong2() {
-            // Stop song 1 completely
-            bg1.pause();
-            bg1.currentTime = 0;
+        function switchToSong2() {
+            // STOP song1 aggressive retry loop
+            if (checkPlayInterval) clearInterval(checkPlayInterval);
 
-            // Start song 2 on loop
-            bg2.currentTime = 0;
-            bg2.play().then(() => {
-                console.log("Song 2 started playing (loop)");
-            }).catch(e => {
-                console.log("Song 2 play failed:", e);
-                // Try again on next interaction
-                document.addEventListener('click', () => {
-                    bg2.play().catch(() => { });
-                }, { once: true });
-            });
+            // We don't need to pause bg1 here because it just ended
+            // But we can ensure it's not playing just in case
+            bg1.pause();
+
+            // Remove fallback iframe if it still exists
+            const iframe = document.getElementById('audioIframe');
+            if (iframe) iframe.remove();
+
+            bg2.play().catch(() => { });
         }
+
+        // Start song1 immediately when page loads
+        window.addEventListener('load', startSong1);
+        document.addEventListener('DOMContentLoaded', startSong1);
 
         // ============ CHERRY BLOSSOM PETALS ============
         const petalTypes = ['🌸', '🌺', '💮', '✿', '❀'];
@@ -834,16 +840,18 @@
         }
 
         function initPetals() {
+            // Create initial batch
             for (let i = 0; i < 12; i++) {
                 setTimeout(createPetal, i * 200);
             }
+            // Continuous creation
             setInterval(createPetal, 700);
         }
 
         // ============ NO BUTTON BEHAVIOR ============
         btnNo.addEventListener('click', () => {
-            // Try to play song1 if paused
-            if (bg1.paused && !song1HasEnded) {
+            // Try to play song1 if not playing
+            if (bg1.paused) {
                 bg1.play().catch(() => { });
             }
 
@@ -851,6 +859,7 @@
 
             noClickCount++;
 
+            // Shake and dim heart
             brokenHeart.classList.add('shake', 'dimmed');
 
             setTimeout(() => {
@@ -861,11 +870,13 @@
                 brokenHeart.classList.remove('dimmed');
             }, 700);
 
+            // Grow YES button
             if (yesButtonScale < 1.7) {
                 yesButtonScale += 0.12;
                 btnYes.style.transform = `scale(${yesButtonScale})`;
             }
 
+            // After 5 clicks, slide out NO button
             if (noClickCount >= 5) {
                 btnNo.classList.add('slide-out');
                 setTimeout(() => {
@@ -875,13 +886,13 @@
             }
         });
 
-        // ============ YES BUTTON BEHAVIOR ============
+        // ============ YES BUTTON (Modal) BEHAVIOR ============
         btnYes.addEventListener('click', () => {
             if (isTransitioning) return;
-            isTransitioning = true;
+            isTransitioning = true; // Mark as transitioning so we don't double click
 
             // Ensure song1 is playing
-            if (bg1.paused && !song1HasEnded) {
+            if (bg1.paused) {
                 bg1.play().catch(() => { });
             }
 
@@ -889,40 +900,42 @@
             modalOverlay.classList.add('active');
         });
 
-        // ============ MODAL OK BUTTON ============
+        // ============ MODAL 'OK' BEHAVIOR ============
         modalBtn.addEventListener('click', () => {
+            // Close modal
             modalOverlay.classList.remove('active');
-            userClickedYes = true;
 
             // Disable buttons and show waiting message
             buttonsContainer.classList.add('disabled');
             waitingMessage.classList.add('visible');
 
-            // Make heart pulse warmly while waiting
+            // Heart can pulse a bit while waiting
             brokenHeart.classList.remove('dimmed');
-            brokenHeart.style.animation = 'healPulse 1.5s ease-in-out infinite';
-            brokenHeart.style.filter = 'drop-shadow(0 0 30px rgba(255, 100, 180, 0.6))';
-
-            // If song already ended, transition immediately
-            if (song1HasEnded) {
-                finishTransition();
-            }
-            // Otherwise, wait for song to end (handled by 'ended' event)
+            brokenHeart.classList.add('healed'); // Just to start the warm pulse, text stays same for now
+            brokenHeart.textContent = '💔'; // Keep it broken for now, until song ends
+            // Override the healed animation to just be a soft pulse if needed, 
+            // but the existing 'healed' class has a nice pulse. 
+            // We want it to "pulse warmly". The current 'healed' animation is 'healPulse'.
+            // That works.
         });
 
-        // ============ FINISH TRANSITION ============
+        // ============ FINISH TRANSITION (Call when song ends) ============
         function finishTransition() {
-            // Heal the heart
+            // STOP song1 aggressive retry loop IMMEDIATELY
+            if (checkPlayInterval) clearInterval(checkPlayInterval);
+
+            // Heal the heart fully
             brokenHeart.textContent = '❤️';
             brokenHeart.classList.add('healed');
-            brokenHeart.style.animation = '';
-            brokenHeart.style.filter = '';
             heartCrack.classList.add('healed');
 
+            // Hide waiting message
             waitingMessage.classList.remove('visible');
 
+            // Create swirl effect
             createSwirlEffect();
 
+            // Transition to Page 2
             setTimeout(() => {
                 page1.classList.add('page-fade-out');
 
@@ -930,13 +943,15 @@
                     page1.classList.add('page-hidden');
                     page2.classList.remove('page-hidden');
 
-                    // Start Song 2 (loops)
-                    startSong2();
+                    // Switch from song1 to song2
+                    switchToSong2();
 
+                    // Fade in page 2
                     setTimeout(() => {
                         page2.classList.add('page-visible');
                         thankYouHeader.classList.add('visible');
 
+                        // Start letter animation
                         setTimeout(() => {
                             initializeLetterAnimation();
                         }, 800);
@@ -978,10 +993,12 @@
 
         // ============ LETTER TYPING ANIMATION ============
         let currentParagraphIndex = 0;
+        let isTyping = false;
 
         function initializeLetterAnimation() {
             letterContent.innerHTML = '';
 
+            // Create all paragraph elements
             letterParagraphs.forEach((text, index) => {
                 const p = document.createElement('p');
                 p.className = 'letter-paragraph';
@@ -990,6 +1007,7 @@
                 letterContent.appendChild(p);
             });
 
+            // Start typing first paragraph
             currentParagraphIndex = 0;
             typeNextParagraph();
         }
@@ -1010,6 +1028,7 @@
 
                 currentParagraphIndex++;
 
+                // Random delay between paragraphs (400-700ms)
                 const delay = 400 + Math.random() * 300;
                 setTimeout(typeNextParagraph, delay);
             });
@@ -1027,6 +1046,7 @@
 
             function typeChar() {
                 if (i >= html.length) {
+                    // Remove cursor when done
                     if (cursor.parentNode) {
                         cursor.remove();
                     }
@@ -1035,6 +1055,7 @@
                     return;
                 }
 
+                // Handle HTML tags like <br>
                 if (html.substring(i, i + 4) === '<br>') {
                     displayText += '<br>';
                     i += 4;
@@ -1043,9 +1064,11 @@
                     i++;
                 }
 
+                // Update display
                 element.innerHTML = displayText;
                 element.appendChild(cursor);
 
+                // Random delay for natural feel (25-55ms)
                 const delay = 25 + Math.random() * 30;
                 setTimeout(typeChar, delay);
             }
@@ -1056,15 +1079,6 @@
         // ============ INITIALIZE ============
         document.addEventListener('DOMContentLoaded', () => {
             initPetals();
-            startSong1();
-            setupInteractionFallback();
-        });
-
-        window.addEventListener('load', () => {
-            // Extra attempt on full load
-            if (bg1.paused && !song1HasEnded) {
-                startSong1();
-            }
         });
     </script>
 </body>
